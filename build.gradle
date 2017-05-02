@@ -55,6 +55,15 @@ uploadArchives {
     }
 }
 
+install {
+    repositories.mavenInstaller {
+        pom.version = '1.0'
+        pom.artifactId = 'kscript'
+//        pom.group = 'de.mpicbg.scicomp'
+    }
+}
+
 //http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
-group = 'kscript'
-version = '1.0-SNAPSHOT'
+group = 'de.mpicbg.scicomp'
+version = '1.0'
+//version = '1.0-SNAPSHOT'

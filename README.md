@@ -11,7 +11,7 @@ Support API for `kscript`
 A support API written in Kotlin to simplify scripting with `[kscript](https://github.com/holgerbrandl/kscript)`
 
  
-For documentation see [kscript](https://github.com/holgerbrandl/kscript#support-api)
+**For documentation see [kscript manual](https://github.com/holgerbrandl/kscript#support-api)**
 
 
 Support
@@ -26,7 +26,7 @@ Installation
 
 To get started simply add it as a dependency via Jcenter:
 ```
-compile "de.mpicbg.scicomp:krangl:0.4"
+compile "de.mpicbg.scicomp:kscript:1.0"
 ```
 
 
@@ -34,17 +34,3 @@ License
 -------
 
 [MIT](LICENSE)
-
-
-Developer Info
---------------
-
-
-```bash
-## to install to local maven repo
-gradle install
-
-## to run the tests 
-gradle test
-
-```
