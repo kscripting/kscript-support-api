@@ -14,9 +14,16 @@ gradle test
 Release Checklist
 -----------------
 
-1. Update version in build.gradle and README
-2. Push and create github release tag
-3. 
+1. Update version in
+* `build.gradle`
+* `kscript and`
+* `kscript-support-api/README`
+* `kscript/README`
+
+
+1. Push and create github release tag
+
+2. 
 ```
 gradle install
 ```
