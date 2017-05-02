@@ -1,4 +1,6 @@
 language: java
+jdk:
+  - oraclejdk8
 
 ## https://docs.travis-ci.com/user/languages/java
 ## http://stackoverflow.com/questions/20707017/how-to-run-junit-tests-with-gradle
