@@ -3,7 +3,6 @@ package kscript
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
-import kotlin.system.exitProcess
 
 
 // for top-level vs member extensions see https://kotlinlang.org/docs/reference/extensions.html#scope-of-extensions
@@ -20,18 +19,16 @@ fun argLines(arg: String, stdinNames: List<String> = listOf("-", "stdin")): Sequ
 
     stopIfNot(inputFile.canRead()) { "Can not read from '${arg}'" }
 
-    // not we don't close the buffer with this approach
+    // todo we don't close the buffer with this approach
     //    BufferedReader(FileReader(inputFile )).use { return it }
     return BufferedReader(FileReader(inputFile)).lineSequence()
 }
 
+fun mapLines(arg: String, stdinNames: List<String> = listOf("-", "stdin"), trafo: (String) -> String) =
+        argLines(arg, stdinNames).map { trafo(it) }.print()
+
+fun filterLines(arg: String, stdinNames: List<String> = listOf("-", "stdin"), trafo: (String) -> Boolean) =
+        argLines(arg, stdinNames).filter { trafo(it) }.print()
 
 
 fun Sequence<String>.print() = forEach { println(it) }
-
-
-fun processStdin(trafo: (String) -> String) {
-    generateSequence() { readLine() }.map {
-        println(trafo(it))
-    }
-}

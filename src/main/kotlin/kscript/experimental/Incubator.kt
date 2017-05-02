@@ -18,3 +18,10 @@ fun <T> File.mapLines(trafo: (String) -> T) {
 fun String.processLines(trafo: (String) -> String) {
     split("\n").map { println(trafo(it)) }
 }
+
+
+fun processStdin(trafo: (String) -> String) {
+    generateSequence() { readLine() }.map {
+        println(trafo(it))
+    }
+}

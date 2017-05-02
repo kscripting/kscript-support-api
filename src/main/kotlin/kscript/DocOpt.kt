@@ -12,18 +12,24 @@ import java.io.File
 /** Simple Kotlin facade for org.docopt.Docopt.Docopt(java.lang.String) .*/
 class DocOpt(args: Array<String>, val usage: String) {
 
-    val myDO by lazy {
-        Docopt(usage).parse(args.toList()).map {
-            it.key.removePrefix("--").replace("[<>]".toRegex(), "") to it.value?.toString()
+    val docopt = Docopt(usage)
+
+    private val myDO by lazy {
+        docopt.parse(args.toList()).map {
+            it.key.removePrefix("--").replace("[<>]".toRegex(), "") to it.value
         }.toMap()
     }
 
-    fun getString(key: String) = myDO[key]!!
-    fun getStrings(key: String) = myDO[key]!!
+    fun getString(key: String) = myDO[key]!!.toString()
+    fun getStrings(key: String) = (myDO[key]!! as List<*>).map { it as String }
 
-    fun getInt(key: String) = myDO[key]!!.toInt()
+    fun getFile(key: String) = File(getString(key))
+    fun getFiles(key: String) = getStrings(key).map { File(it) }
 
-    fun getNumber(key: String) = myDO[key]!!.toFloat()
 
-    fun getBoolean(key: String) = myDO[key]!!.toBoolean()
+    fun getInt(key: String) = myDO[key]!!.toString().toInt()
+
+    fun getNumber(key: String) = myDO[key]!!.toString().toFloat()
+
+    fun getBoolean(key: String) = myDO[key]!!.toString().toBoolean()
 }
