@@ -2,8 +2,7 @@ package kscript.test
 
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
-import kscript.print
-import kscript.stdin
+import kscript.*
 
 /**
  * @author Holger Brandl
