@@ -24,10 +24,10 @@ fun argLines(arg: String, stdinNames: List<String> = listOf("-", "stdin")): Sequ
     return BufferedReader(FileReader(inputFile)).lineSequence()
 }
 
-fun mapLines(arg: String, stdinNames: List<String> = listOf("-", "stdin"), trafo: (String) -> String) =
+fun argMap(arg: String, stdinNames: List<String> = listOf("-", "stdin"), trafo: (String) -> String) =
         argLines(arg, stdinNames).map { trafo(it) }.print()
 
-fun filterLines(arg: String, stdinNames: List<String> = listOf("-", "stdin"), trafo: (String) -> Boolean) =
+fun argFilter(arg: String, stdinNames: List<String> = listOf("-", "stdin"), trafo: (String) -> Boolean) =
         argLines(arg, stdinNames).filter { trafo(it) }.print()
 
 
