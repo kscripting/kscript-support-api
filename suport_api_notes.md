@@ -24,7 +24,10 @@ Release Checklist
 1. Push and create github release tag
 
 2. 
-```
+```bash
+# cd /Users/brandl/projects/kotlin/kscript-support-api
+
+gradle test
 gradle install
 ```
 
