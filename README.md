@@ -27,7 +27,7 @@ Installation
 
 To get started simply add it as a dependency via Jcenter:
 ```
-compile "de.mpicbg.scicomp:kscript:1.0"
+compile "de.mpicbg.scicomp:kscript:1.1"
 ```
 
 
