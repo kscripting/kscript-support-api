@@ -2,14 +2,11 @@ Support API for `kscript`
 =========================
 
 
-[![Build Status](https://travis-ci.org/holgerbrandl/kscript-support-api.svg?branch=master)](https://travis-ci.org/holgerbrandl/kscript-support-api)
-
-
-[ ![Download](https://api.bintray.com/packages/holgerbrandl/mpicbg-scicomp/kscript/images/download.svg) ](https://bintray.com/holgerbrandl/mpicbg-scicomp/kscript/_latestVersion)
+[![Build Status](https://travis-ci.org/holgerbrandl/kscript-support-api.svg?branch=master)](https://travis-ci.org/holgerbrandl/kscript-support-api) [ ![Download](https://api.bintray.com/packages/holgerbrandl/mpicbg-scicomp/kscript/images/download.svg) ](https://bintray.com/holgerbrandl/mpicbg-scicomp/kscript/_latestVersion)
 
 
 
-A support API written in Kotlin to simplify scripting with `[kscript](https://github.com/holgerbrandl/kscript)`
+A support API written in Kotlin to simplify scripting with [`kscript`](https://github.com/holgerbrandl/kscript)
 
  
 **For documentation see [kscript manual](https://github.com/holgerbrandl/kscript#support-api)**
@@ -24,6 +21,8 @@ Feel welcome to report issues or suggestions [here](https://github.com/holgerbra
 
 Installation
 ------------
+
+Even if the artifact is intended to be used alongside with `kscript` you can also use it without to add enhanced DocOpt support, various CLI and data streaming utilities to your project.
 
 To get started simply add it as a dependency via Jcenter:
 ```
