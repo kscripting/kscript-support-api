@@ -1,0 +1,5 @@
+year	month	day	dep_time	dep_delay	arr_time	arr_delay	carrier	tailnum	flight	origin	dest	air_time	distance	hour	minute
+2013	1	1	517	2	830	11	UA	N14228	1545	EWR	IAH	227	1400	5	17
+2013	1	1	533	4	850	20	UA	N24211	1714	LGA	IAH	227	1416	5	33
+2013	1	1	542	2	923	33	AA	N619AA	1141	JFK	MIA	160	1089	5	42
+2013	1	1	544	-1	1004	-18	B6	N804JB	725	JFK	BQN	183	1576	5	44
