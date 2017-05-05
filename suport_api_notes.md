@@ -3,6 +3,7 @@ Developer Info
 
 
 ```bash
+#cd /Users/brandl/projects/kotlin/kscript-support-api
 ## to install to local maven repo
 gradle install
 
