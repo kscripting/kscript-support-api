@@ -8,9 +8,13 @@ buildscript {
     }
 }
 
+plugins { id "com.jfrog.bintray" version "1.2" }
+
+
 apply plugin: 'kotlin'
 apply plugin: 'application'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 //mainClassName = 'demo.HelloWorldKt'
 mainClassName = "de.mpicbg.scicomp.kutils.BashKt" // not needed but does not work without
@@ -32,15 +36,40 @@ dependencies {
     testCompile "io.kotlintest:kotlintest:2.0.1"
 }
 
-
 // http://stackoverflow.com/questions/11474729/how-to-build-sources-jar-with-gradle
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
 }
 
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+//http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
+group = 'de.mpicbg.scicomp'
+version = '1.1.4'
+//version = '1.1-SNAPSHOT'
+
+
 artifacts {
     archives sourcesJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact sourcesJar { classifier "sources" }
+
+            // just needed because artifact name differs from projet name
+            version = project.version
+            artifactId = 'kscript'
+            groupId = project.group
+        }
+    }
 }
 
 // https://docs.gradle.org/current/userguide/maven_plugin.html
@@ -56,15 +85,43 @@ uploadArchives {
     }
 }
 
+
 install {
     repositories.mavenInstaller {
-        pom.version = '1.2-SNAPSHOT'
+        pom.version = project.version
         pom.artifactId = 'kscript'
-//        pom.group = 'de.mpicbg.scicomp'
+        pom.groupId = project.group
     }
 }
 
-//http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
-group = 'de.mpicbg.scicomp'
-version = '1.2-SNAPSHOT'
-//version = '1.1-SNAPSHOT'
+if (hasProperty('bintray_user') && hasProperty('bintray_key')) {
+    bintray {
+
+        // property must be set in ~/.gradle/gradle.properties
+        user = bintray_user
+        key = bintray_key
+
+        publications = ['maven'] //When uploading configuration files
+
+        dryRun = false //Whether to run this as dry-run, without deploying
+        publish = true // If version should be auto published after an upload
+
+        pkg {
+            repo = 'mpicbg-scicomp'
+            name = 'kscript'
+            vcsUrl = 'https://github.com/holgerbrandl/kscript-support-api'
+
+            licenses = ['MIT']
+            publicDownloadNumbers = true
+
+            //Optional version descriptor
+            version {
+                name = project.version //Bintray logical version name
+                desc = '.'
+                released = new java.util.Date()
+                vcsTag = 'v' + project.version
+            }
+        }
+        /**/
+    }
+}
