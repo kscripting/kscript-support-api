@@ -1,4 +1,4 @@
-package kscript
+package kscript.util
 
 import org.docopt.Docopt
 import java.io.File

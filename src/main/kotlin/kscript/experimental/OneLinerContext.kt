@@ -1,6 +1,6 @@
 package kscript.experimental
 
-import kscript.resolveArgFile
+import kscript.text.resolveArgFile
 
 /**
  * @author Holger Brandl
@@ -9,7 +9,7 @@ import kscript.resolveArgFile
 abstract class OneLinerContext(args: Array<String>) {
 
     val arg by lazy { resolveArgFile(args) }
-    //    val stdin by lazy {  kscript.stdin }
+    //    val stdin by lazy {  kscript.support.getStdin }
 
     init {
         apply(arg)

@@ -1,7 +1,7 @@
 package kscript.examples
 
-import kscript.*
 import kscript.experimental.OneLinerContext
+import kscript.text.*
 
 /**
  * @author Holger Brandl

@@ -2,7 +2,7 @@ package kscript.test
 
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
-import kscript.DocOpt
+import kscript.util.DocOpt
 import java.io.File
 
 /**

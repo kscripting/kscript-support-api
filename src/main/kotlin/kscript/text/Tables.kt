@@ -1,4 +1,4 @@
-package kscript
+package kscript.text
 
 /**
  * Utility methods to allow for awk-like data processing using kscript.
@@ -50,7 +50,7 @@ fun Sequence<Row>.add(rule: (Row) -> String): Sequence<Row> {
 }
 
 
-//@Deprecated("use kscript.awk() instead")
+//@Deprecated("use kscript.support.awk() instead")
 //fun Sequence<String>.splitMap(vararg rules: (Row) -> String, separator: String = "\t", joinWith: String = separator) {
 //    map { it.split(separator).let { splitLine -> rules.map { it(splitLine) } } }.print()
 //}
