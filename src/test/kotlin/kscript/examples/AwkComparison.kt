@@ -16,9 +16,20 @@ object AwkExample : OneLinerContext(args) {
 
         lines.split().filter { it[3].matches("UA".toRegex()) }.print()
 
+        (1..3).asSequence().toList().toTypedArray()
         // remove header
+
+        val foo = arrayOf(*arrayOf(1..3).toList().toTypedArray())
+
+
+
         lines.drop(1).split().filter { it[3].matches("UA".toRegex()) }.print()
 
+
+        // positive selection
+        lines.split().select(with(1..3).and(3)).print()
+        // negative selection
+        lines.split().select(without(7).and(3..4)).print()
 
         lines.awk { it[1] + it[2] }
 
