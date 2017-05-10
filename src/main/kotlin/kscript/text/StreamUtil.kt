@@ -1,17 +1,14 @@
 package kscript.text
 
 
-/** a `Sequence<String>` iterator for standard input */
+/** A `Sequence<String>` iterator for standard input */
 val stdin by lazy { generateSequence() { readLine() } }
 
 fun linesFrom(file: java.io.File) = java.io.BufferedReader(java.io.FileReader(file)).lineSequence()
 
-// just used for testing and development
-fun linesFrom(vararg lines: String) = lines.asSequence()
-
 
 /**
- * File argument processor that works similar to awk. If data is available on stdin, use it. If not expect a file argument and read from that one instead.
+ * File argument processor that works similar to awk: If data is available on stdin, use it. If not expect a file argument and read from that one instead.
  * */
 fun resolveArgFile(args: Array<String>, position: Int = 0): Sequence<String> {
     //    if (stdin.iterator().hasNext()) return stdin
