@@ -1,6 +1,5 @@
 package kscript.test
 
-import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
 import kscript.*
 import java.io.File
@@ -18,8 +17,8 @@ class SupportApiTest : StringSpec() { init {
         //        "hello".length shouldBe 5
         //        stopIfNot("FOO"=="BAR"){"condition not met"}
         println("current dir is " + File(".").absolutePath)
-        argMap("src/test/resources/flights_head.txt") { it.split("\t")[7] }
-        argFilter("src/test/resources/flights_head.txt") { it.split("\t")[7] == "UA" }
+        linesFrom(File("src/test/resources/flights_head.txt")).map { it.split("\t")[7] }.print()
+        linesFrom(File("src/test/resources/flights_head.txt")).filter { it.split("\t")[7] == "UA" }.print()
     }
 }
 }

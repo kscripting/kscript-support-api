@@ -25,3 +25,8 @@ fun processStdin(trafo: (String) -> String) {
         println(trafo(it))
     }
 }
+
+
+operator fun File.div(childName: String): File {
+    return this.resolve(childName)
+}
