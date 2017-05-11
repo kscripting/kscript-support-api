@@ -36,7 +36,7 @@ class SupportApiTest : StringSpec() { init {
     "allow to select columsn" {
         someFlights().split()
                 .select(with(3).and(11..13).and(1))
-                .first() shouldBe listOf("day", "flight", "tailnum", "origin", "year")
+                .first().data shouldBe listOf("day", "flight", "tailnum", "origin", "year")
     }
 
 

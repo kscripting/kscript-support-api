@@ -1,5 +1,6 @@
 package kscript.examples
 
+import kscript.stopIfNot
 import kscript.util.OneLinerContext
 import kscript.text.*
 
@@ -94,7 +95,6 @@ object AwkExample : OneLinerContext(args) {
         arg.filter { true }.print()
 
         lines.split().select(with(0).and(1)).print()
-
     }
 }
 //file:///Users/brandl/Desktop/awk_cheatsheets.pdf
