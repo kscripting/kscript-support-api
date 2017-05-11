@@ -48,9 +48,10 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 //http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
-group = 'de.mpicbg.scicomp'
-//version = '1.1.4'
-version = '1.2-SNAPSHOT'
+//group = 'de.mpicbg.scicomp'
+group = 'com.github.holgerbandl'
+version = '1.1.5'
+//version = '1.2-SNAPSHOT'
 
 
 artifacts {
@@ -107,7 +108,7 @@ if (hasProperty('bintray_user') && hasProperty('bintray_key')) {
         publish = true // If version should be auto published after an upload
 
         pkg {
-            repo = 'mpicbg-scicomp'
+            repo = 'github'
             name = 'kscript'
             vcsUrl = 'https://github.com/holgerbrandl/kscript-support-api'
 

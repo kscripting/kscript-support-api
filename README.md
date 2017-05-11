@@ -2,7 +2,8 @@ Support API for `kscript`
 =========================
 
 
-[![Build Status](https://travis-ci.org/holgerbrandl/kscript-support-api.svg?branch=master)](https://travis-ci.org/holgerbrandl/kscript-support-api) [ ![Download](https://api.bintray.com/packages/holgerbrandl/mpicbg-scicomp/kscript/images/download.svg) ](https://bintray.com/holgerbrandl/mpicbg-scicomp/kscript/_latestVersion)
+[![Build Status](https://travis-ci.org/holgerbrandl/kscript-support-api.svg?branch=master)](https://travis-ci.org/holgerbrandl/kscript-support-api) [ ![Download](https://api.bintray.com/packages/holgerbrandl/github/kscript/images/download.svg) ](https://bintray.com/holgerbrandl/github/kscript/_latestVersion)[](https://bintray.com/)
+
 
 
 
