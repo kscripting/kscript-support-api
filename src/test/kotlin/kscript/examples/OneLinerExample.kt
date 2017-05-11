@@ -1,6 +1,6 @@
 package kscript.examples
 
-import kscript.experimental.OneLinerContext
+import kscript.util.OneLinerContext
 import kscript.text.add
 import kscript.text.print
 import kscript.text.split

@@ -1,4 +1,4 @@
-package kscript.experimental
+package kscript.util
 
 import kscript.text.resolveArgFile
 

@@ -1,6 +1,6 @@
 package kscript.examples
 
-import kscript.experimental.OneLinerContext
+import kscript.util.OneLinerContext
 import kscript.text.*
 
 /**
@@ -29,7 +29,7 @@ object AwkExample : OneLinerContext(args) {
         lines.awk { it[3] }
 
         // http://stackoverflow.com/questions/15361632/delete-a-column-with-awk-or-sed
-        lines.split().map { it.toMutableList().apply { removeAt(3) } }.print()
+        //        lines.split().select((-3).print()
 
 
 
@@ -87,10 +87,14 @@ object AwkExample : OneLinerContext(args) {
         // Prints Record(line) number, and number of fields in that record
         // awk '{print NR,"->",NF}' file.txt
         lines.split().mapIndexed { index, row -> index.toString() + " -> " + row.size }.print()
+        lines.split().mapIndexed { index, row -> index.toString() + " -> " + row.size }.print()
 
 
         val arg by lazy { resolveArgFile(args) }
         arg.filter { true }.print()
+
+        lines.split().select(with(0).and(1)).print()
+
     }
 }
 //file:///Users/brandl/Desktop/awk_cheatsheets.pdf

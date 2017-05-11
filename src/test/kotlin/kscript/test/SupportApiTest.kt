@@ -1,36 +1,51 @@
 package kscript.test
 
-import io.kotlintest.matchers.should
-import io.kotlintest.matchers.shouldBe
-import io.kotlintest.matchers.shouldEqual
-import io.kotlintest.matchers.startWith
+import io.kotlintest.matchers.*
 import io.kotlintest.specs.StringSpec
-import kscript.text.linesFrom
-import kscript.text.print
-import kscript.text.resolveArgFile
-import kscript.text.split
-import java.io.File
+import kscript.isTestMode
+import kscript.text.*
 
 /**
  * @author Holger Brandl
  */
+
+
+fun someFlights() = resolveArgFile(arrayOf("src/test/resources/some_flights.tsv"))
+
+fun flightsZipped() = resolveArgFile(arrayOf("src/test/resources/flights.tsv.gz"))
+fun flights() = resolveArgFile(arrayOf("src/test/resources/flights.txt"))
+
+
 class SupportApiTest : StringSpec() { init {
 
-    //    "allow to use stdin for filtering and mapping" {
-    //        kscript.text.stdin.filter { "^de0[-0]*".toRegex().matches(it) }.map { it + "foo:" }.print()
-    //    }
+    isTestMode = true
+
 
     "extract field with column filter" {
-        linesFrom(File("src/test/resources/flights_head.txt")).split().
-                filter { it[8] == "N14228" }.
-                map { it[10] }.
+        someFlights().split().
+                filter { it[12] == "N14228" }.
+                map { it[13] }.
                 toList().
                 apply {
                     size shouldEqual 1
                     first() shouldEqual "EWR"
                 }
-
     }
+
+
+    "allow to select columsn" {
+        someFlights().split()
+                .select(with(3).and(11..13).and(1))
+                .first() shouldBe listOf("day", "flight", "tailnum", "origin", "year")
+    }
+
+
+    "rejeced mixed select" {
+        shouldThrow<IllegalArgumentException> {
+            someFlights().split().select(1, -2)
+        }.message shouldBe "[ERROR] Can not mix positive and negative selections"
+    }
+
 
     "compressed lines should be unzipped on the fly"{
         resolveArgFile(arrayOf("src/test/resources/flights.tsv.gz")).

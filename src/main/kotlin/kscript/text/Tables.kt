@@ -23,7 +23,16 @@ import kscript.stopIfNot
 
 
 /** For sake of readability we refer to a list of strings as a row here. */
-typealias Row = List<String>
+//typealias Row = List<String>
+
+class Row(val data: List<String>) : List<String> by data {
+
+    constructor(vararg data: String) : this(data.asList())
+
+    override fun get(index: Int): String = data[index - 1]
+
+    override fun toString(): String = data.joinToString("\t")
+}
 
 //typealias RowSequence = Sequence<Row>
 //class RowSequence(input: Sequence<String>){
@@ -35,7 +44,7 @@ typealias Row = List<String>
  * @param separator The used separator character which defaults to tabs.
  */
 fun Sequence<String>.split(separator: String = "\t"): Sequence<Row> {
-    return this.map { it.split(separator) }
+    return this.map { Row(it.split(separator)) }
 }
 
 /** awk-like convenience wrapper around split->map->join->print */
@@ -43,12 +52,12 @@ fun Sequence<String>.awk(separator: String = "\t", rule: (Row) -> String) = spli
 
 
 fun Sequence<Row>.map(vararg rules: (Row) -> String): Sequence<Row> {
-    return map { splitLine -> rules.map { it(splitLine) } }
+    return map { splitLine -> Row(rules.map { it(splitLine) }) }
 }
 
 /** Adds a new column to a row. */
 fun Sequence<Row>.add(rule: (Row) -> String): Sequence<Row> {
-    return map { row -> listOf(*row.toTypedArray(), rule(row)) }
+    return map { row -> Row(*row.toTypedArray(), rule(row)) }
 }
 
 
@@ -63,8 +72,7 @@ fun Sequence<Row>.join(separator: String = "\t") = map { it.joinToString(separat
 /** Joins rows with the provided `separator` and print them to `stdout`. */
 fun Sequence<Row>.print(separator: String = "\t") = join(separator).print()
 
-
-fun List<Row>.print() = forEach { println(it) }
+fun List<Row>.print(separator: String = "\t") = asSequence().print(separator)
 
 
 //
@@ -97,19 +105,15 @@ fun without(index: Int) = NegSelect(arrayOf(index))
 fun without(range: IntRange) = NegSelect(range.toList().toTypedArray())
 
 
-private fun retainColumn(selectIndex: ColSelect, colIndex: Int): Boolean {
-    val indexInRange = selectIndex.indices.contains(colIndex)
-
-    return if (selectIndex is PosSelect) indexInRange else !indexInRange
-}
-
 /**
  * Select or remove columns by providing an index-vector. Positive selections are done with [with] and  negative selections with [without]. Both methods implement a [builder][https://en.wikipedia.org/wiki/Builder_pattern] to construct more complex selectors.
  */
 fun Sequence<Row>.select(vararg colIndices: Int): Sequence<Row> {
     val isPositive = colIndices.all { it > 0 }
-    stopIfNot(isPositive || colIndices.all { it < 0 }) {
-        " Can not mix positive and negative selections"
+    val isNegative = colIndices.all { it < 0 }
+
+    stopIfNot(isPositive xor isNegative) {
+        "Can not mix positive and negative selections"
     }
 
     val selector = if (isPositive) PosSelect(arrayOf(*colIndices.toTypedArray())) else NegSelect(arrayOf(*colIndices.toTypedArray()))
@@ -121,12 +125,14 @@ fun Sequence<Row>.select(columns: ColSelect): Sequence<Row> {
     // more efficient but does not allow to change the order
     //    return map { it.filterIndexed { index, _ -> retainColumn(columns, index + 1) } }
 
+    stopIfNot(columns.indices.all { it != 0 }) { "kscript.text.* is using 1-based arrays to ease awk transition" }
+
     return if (columns is PosSelect) {
         // positive selection
-        map { row -> columns.indices.map { row[it - 1] } }
+        map { row -> Row(columns.indices.map { row[it] }) }
     } else {
         // negative selection
-        map { it.filterIndexed { index, _ -> !columns.indices.contains(index - 1) } }
+        map { Row(it.filterIndexed { index, _ -> !columns.indices.contains(index) }) }
     }
 }
 
