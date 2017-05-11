@@ -131,5 +131,9 @@ fun Sequence<Row>.select(columns: ColSelect): Sequence<Row> {
 }
 
 
+// http://www.thegeekstuff.com/2010/01/8-powerful-awk-built-in-variables-fs-ofs-rs-ors-nr-nf-filename-fnr/?ref=binfind.com/web
+//NF Example: Number of Fields in a record
+//val LAST = Integer.MIN_VALUE
+
 // todo  add krangl ColNames interface here
 

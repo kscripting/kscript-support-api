@@ -13,15 +13,7 @@ object AwkExample : OneLinerContext(args) {
     override fun apply(lines: Sequence<String>) {
         lines.split().map({ it[1] }, { it[2] }).print()
 
-
         lines.split().filter { it[3].matches("UA".toRegex()) }.print()
-
-        (1..3).asSequence().toList().toTypedArray()
-        // remove header
-
-        val foo = arrayOf(*arrayOf(1..3).toList().toTypedArray())
-
-
 
         lines.drop(1).split().filter { it[3].matches("UA".toRegex()) }.print()
 
@@ -38,6 +30,7 @@ object AwkExample : OneLinerContext(args) {
 
         // http://stackoverflow.com/questions/15361632/delete-a-column-with-awk-or-sed
         lines.split().map { it.toMutableList().apply { removeAt(3) } }.print()
+
 
 
         //        http@ //tuxgraphics.org/~guido/scripts/awk-one-liner.html
@@ -62,7 +55,6 @@ object AwkExample : OneLinerContext(args) {
         //        awk '{print FNR "\t" $0}'
         lines.mapIndexed { num, line -> num.toString() + " " + line }.print()
 
-
         //        Remove duplicate consecutive lines (uniq):
         //        awk 'a !~ $0{print}; {a=$0}'
 
@@ -84,6 +76,18 @@ object AwkExample : OneLinerContext(args) {
         //        awk '/start/,/stop/' file.txt
 
         lines.dropWhile { it.startsWith("foo") }.takeWhile { it.startsWith("bar") }.print()
+
+
+        //        Print the last field in each line:
+        //        awk -F: '{ print $NF }' file.txt
+        lines.split(":").map { it[it.size - 1] }.print()
+
+
+
+        // Prints Record(line) number, and number of fields in that record
+        // awk '{print NR,"->",NF}' file.txt
+        lines.split().mapIndexed { index, row -> index.toString() + " -> " + row.size }.print()
+
 
         val arg by lazy { resolveArgFile(args) }
         arg.filter { true }.print()
