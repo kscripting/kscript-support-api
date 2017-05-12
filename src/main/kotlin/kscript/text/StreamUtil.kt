@@ -2,7 +2,7 @@ package kscript.text
 
 
 /** A `Sequence<String>` iterator for standard input */
-val stdin by lazy { generateSequence() { readLine() } }
+public val stdin by lazy { generateSequence() { readLine() } }
 
 fun linesFrom(file: java.io.File) = java.io.BufferedReader(java.io.FileReader(file)).lineSequence()
 
