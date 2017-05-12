@@ -27,7 +27,7 @@ Even if the artifact is intended to be used alongside with `kscript` you can als
 
 To get started simply add it as a dependency via Jcenter:
 ```
-compile "de.mpicbg.scicomp:kscript:1.2"
+compile "de.mpicbg.scicomp:kscript:1.2.1"
 ```
 
 
