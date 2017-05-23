@@ -95,6 +95,7 @@ object AwkExample : OneLinerContext(args) {
         arg.filter { true }.print()
 
         lines.split().select(with(0).and(1)).print()
+        lines.map { it.replace("NA\"; exonic_part_number \"", "NA\"; exonic_part_number \"i") }.print()
     }
 }
 //file:///Users/brandl/Desktop/awk_cheatsheets.pdf
