@@ -51,7 +51,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 //group = 'de.mpicbg.scicomp'
 group = 'com.github.holgerbrandl'
 //version = '1.1.9'
-version = '1.2.1'
+version = '1.2.2-SNAPSHOT'
 
 
 artifacts {
