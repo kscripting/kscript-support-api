@@ -12,10 +12,10 @@ import java.io.File
 /** Simple Kotlin facade for org.docopt.Docopt.Docopt(java.lang.String) .*/
 class DocOpt(args: Array<String>, val usage: String) {
 
-    val docopt = Docopt(usage)
+    val parsedArgs = Docopt(usage).parse(args.toList())
 
     private val myDO by lazy {
-        docopt.parse(args.toList()).map {
+        parsedArgs.map {
             it.key.removePrefix("--").replace("[<>]".toRegex(), "") to it.value
         }.toMap()
     }
@@ -32,4 +32,8 @@ class DocOpt(args: Array<String>, val usage: String) {
     fun getNumber(key: String) = myDO[key]!!.toString().toFloat()
 
     fun getBoolean(key: String) = myDO[key]!!.toString().toBoolean()
+
+    override fun toString(): String {
+        return parsedArgs.toString()
+    }
 }
