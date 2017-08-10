@@ -34,11 +34,11 @@ gradle install
 
 4. Create new version on jcenter
 
-* Upload jar, sources.jar and pom for new version from `~/.m2/repository/de/mpicbg/scicomp/kscript` to:
+* Upload jar, sources.jar and pom for new version from `~/.m2/repository/com/github/holgerbrandl/kscript` to:
 > https://bintray.com/holgerbrandl/mpicbg-scicomp/kscript
 
 1. Check for release status on
-https://jcenter.bintray.com/de/mpicbg/scicomp/
+https://jcenter.bintray.com/com/github/holgerbrandl/kscript
 
 2. Bump versions for new release cycle
 
