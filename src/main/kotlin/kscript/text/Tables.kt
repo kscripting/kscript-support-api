@@ -83,18 +83,33 @@ fun List<Row>.print(separator: String = "\t") = asSequence().print(separator)
 /** Internal representations for column selection indices. Usually not use directly but rather via [with] and [without].
  */
 abstract class ColSelect(val indices: Array<Int> = emptyArray()) {
+
+    // irrespective of selection mode (positive or negative) indices must be positive in here
+    init {
+        stopIfNot(indices.all { it > 0 }) {
+            "kscript.text.* is using 1-based arrays to ease awk transition, so indices must be strictly positive"
+        }
+    }
+
     abstract fun and(column: Int): ColSelect
     abstract fun and(range: IntRange): ColSelect
+    abstract fun process(lines: Sequence<Row>): Sequence<Row>
 }
 
-class PosSelect(arrayOf: Array<Int>) : ColSelect(arrayOf) {
+class PosSelect(columnIndices: Array<Int>) : ColSelect(columnIndices) {
     override fun and(column: Int) = PosSelect(arrayOf(*indices, column))
     override fun and(range: IntRange) = PosSelect(arrayOf(*indices, *range.toList().toTypedArray()))
+
+    override fun process(lines: Sequence<Row>): Sequence<Row> = lines.map { row -> Row(indices.map { row[it] }) }
 }
 
-class NegSelect(arrayOf: Array<Int>) : ColSelect(arrayOf) {
+class NegSelect(columnIndices: Array<Int>) : ColSelect(columnIndices) {
     override fun and(column: Int) = NegSelect(arrayOf(*indices, column))
     override fun and(range: IntRange) = NegSelect(arrayOf(*indices, *range.toList().toTypedArray()))
+
+    override fun process(lines: Sequence<Row>): Sequence<Row> = lines.map {
+        Row(it.filterIndexed { index, _ -> !indices.contains(index+1) })
+    }
 }
 
 /** Starts building a column selection index. Both positive and negative indices are supported. */
@@ -116,24 +131,20 @@ fun Sequence<Row>.select(vararg colIndices: Int): Sequence<Row> {
         "Can not mix positive and negative selections"
     }
 
-    val selector = if (isPositive) PosSelect(arrayOf(*colIndices.toTypedArray())) else NegSelect(arrayOf(*colIndices.toTypedArray()))
+    val selector = if (isPositive) {
+        PosSelect(arrayOf(*colIndices.toTypedArray()))
+    } else {
+        NegSelect(arrayOf(*colIndices.map { -it }.toTypedArray()))
+    }
 
     return select(selector)
 }
 
-fun Sequence<Row>.select(columns: ColSelect): Sequence<Row> {
+fun Sequence<Row>.select(columnSelector: ColSelect): Sequence<Row> {
     // more efficient but does not allow to change the order
-    //    return map { it.filterIndexed { index, _ -> retainColumn(columns, index + 1) } }
+    //    return map { it.filterIndexed { index, _ -> retainColumn(columnSelector, index + 1) } }
 
-    stopIfNot(columns.indices.all { it != 0 }) { "kscript.text.* is using 1-based arrays to ease awk transition" }
-
-    return if (columns is PosSelect) {
-        // positive selection
-        map { row -> Row(columns.indices.map { row[it] }) }
-    } else {
-        // negative selection
-        map { Row(it.filterIndexed { index, _ -> !columns.indices.contains(index) }) }
-    }
+    return columnSelector.process(this)
 }
 
 

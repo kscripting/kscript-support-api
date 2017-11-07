@@ -7,7 +7,7 @@ import kotlin.system.exitProcess
  */
 
 /**
- * Just used interally to prevent [stopIfNot] to quit the process when running in unit-test mode.
+ * Just used internally to prevent [stopIfNot] to quit the process when running in unit-test mode.
  * It throw an IllegalArgumentException instead.
  */
 internal var isTestMode = false
