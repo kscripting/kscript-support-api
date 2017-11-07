@@ -34,8 +34,12 @@ gradle install
 
 4. Create new version on jcenter
 
-* Upload jar, sources.jar and pom for new version from `~/.m2/repository/com/github/holgerbrandl/kscript` to:
-> https://bintray.com/holgerbrandl/mpicbg-scicomp/kscript
+```bash
+gradle bintrayUpload
+```
+
+<!-- * Upload jar, sources.jar and pom for new version from `~/.m2/repository/com/github/holgerbrandl/kscript` to: -->
+<!-- > https://bintray.com/holgerbrandl/mpicbg-scicomp/kscript -->
 
 1. Check for release status on
 https://jcenter.bintray.com/com/github/holgerbrandl/kscript
