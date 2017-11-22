@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.2'
+    ext.kotlin_version = '1.1.51'
     repositories {
         mavenCentral()
     }
@@ -50,8 +50,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 //http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
 //group = 'de.mpicbg.scicomp'
 group = 'com.github.holgerbrandl'
-//version = '1.1.9'
-version = '1.2.3'
+version = '1.2.4'
 
 
 artifacts {
@@ -65,23 +64,10 @@ publishing {
             from components.java
             artifact sourcesJar { classifier "sources" }
 
-            // just needed because artifact name differs from projet name
+            // just needed because artifact name differs from project name
             version = project.version
-            artifactId = 'kscript'
+            artifactId = 'kscript-support'
             groupId = project.group
-        }
-    }
-}
-
-// https://docs.gradle.org/current/userguide/maven_plugin.html
-uploadArchives {
-    repositories {
-        mavenDeployer {
-//            pom.groupId = 'de.mpicbg.scicomp'
-//            pom.version = '0.1-SNAPSHOT'
-            pom.artifactId = 'kscript'
-
-            repository(url: "file://localhost/tmp/myRepo/")
         }
     }
 }
@@ -90,7 +76,7 @@ uploadArchives {
 install {
     repositories.mavenInstaller {
         pom.version = project.version
-        pom.artifactId = 'kscript'
+        pom.artifactId = 'kscript-support'
         pom.groupId = project.group
     }
 }
@@ -109,7 +95,7 @@ if (hasProperty('bintray_user') && hasProperty('bintray_key')) {
 
         pkg {
             repo = 'github'
-            name = 'kscript'
+            name = 'kscript-support'
             vcsUrl = 'https://github.com/holgerbrandl/kscript-support-api'
 
             licenses = ['MIT']

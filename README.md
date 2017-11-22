@@ -27,7 +27,7 @@ Even if the artifact is intended to be used alongside with `kscript` you can als
 
 To get started simply add it as a dependency via Jcenter:
 ```
-compile "com.github.holgerbrandl:kscript:1.2.3"
+compile "com.github.holgerbrandl:kscript-support:1.2.4"
 ```
 
 
