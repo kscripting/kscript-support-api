@@ -49,6 +49,9 @@ fun Sequence<String>.print() = forEach { println(it) }
 fun Iterable<String>.print() = forEach { println(it) }
 
 
+fun Iterable<String>.trim() = map { it.trim() }
+fun Sequence<String>.trim() = map { it.trim() }
+
 
 //https://dzone.com/articles/readingwriting-compressed-and
 /** Save a list of items into a file. Output can be option ally zipped and a the stringifying operation can be changed from toString to custom operation if needed. */
