@@ -28,8 +28,8 @@ repositories {
 
 // https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_plugin_and_dependency_management
 dependencies {
-//    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "com.offbytwo:docopt:0.6.0.20150202"
 
     testCompile 'junit:junit:4.11'
@@ -50,7 +50,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 //http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
 //group = 'de.mpicbg.scicomp'
 group = 'com.github.holgerbrandl'
-version = '1.2.4'
+version = '1.2.5'
 
 
 artifacts {
