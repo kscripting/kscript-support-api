@@ -21,31 +21,18 @@ Release Checklist
 * `kscript-support-api/README`
 * `kscript/README`
 
-
-1. Push and create github release tag
-
-2. 
-```bash
-# cd /Users/brandl/projects/kotlin/kscript-support-api
-
-gradle test
-gradle install
-```
-
-4. Create new version on jcenter
+# How to publish a new version?
 
 ```bash
-gradle bintrayUpload
+#  cd /c/brandl_data/projects/misc/kscript-support-api
+ 
+./gradlew install
+
+./gradlew publishToMavenLocal
+
+#./gradlew publishToSonatype closeSonatypeStagingRepository
+./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
 ```
-
-<!-- * Upload jar, sources.jar and pom for new version from `~/.m2/repository/com/github/holgerbrandl/kscript` to: -->
-<!-- > https://bintray.com/holgerbrandl/mpicbg-scicomp/kscript -->
-
-1. Check for release status on
-https://jcenter.bintray.com/com/github/holgerbrandl/kscript
-
-2. Bump versions for new release cycle
-
 
 Links
 -----
