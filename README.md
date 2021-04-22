@@ -2,8 +2,7 @@ Support API for `kscript`
 =========================
 
 
-[![Build Status](https://travis-ci.org/holgerbrandl/kscript-support-api.svg?branch=master)](https://travis-ci.org/holgerbrandl/kscript-support-api) [ ![Download](https://api.bintray.com/packages/holgerbrandl/github/kscript/images/download.svg) ](https://bintray.com/holgerbrandl/github/kscript/_latestVersion)[](https://bintray.com/)
-
+[ ![Download](https://img.shields.io/badge/Maven%20Central-1.2.5-orange) ](https://mvnrepository.com/artifact/com.github.holgerbrandl/kscript-support-api)  [![Build Status](https://github.com/holgerbrandl/krangl/workflows/build/badge.svg)](https://github.com/holgerbrandl/kscript-support-api/actions?query=workflow%3Abuild)
 
 
 
@@ -27,7 +26,7 @@ Even if the artifact is intended to be used alongside with `kscript` you can als
 
 To get started simply add it as a dependency via Jcenter:
 ```
-compile "com.github.holgerbrandl:kscript-support:1.2.4"
+compile "com.github.holgerbrandl:kscript-support:1.2.5"
 ```
 
 

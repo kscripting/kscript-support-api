@@ -21,8 +21,8 @@ Release Checklist
 * `kscript-support-api/README`
 * `kscript/README`
 
-# How to publish a new version?
 
+2. Do the central release
 ```bash
 #  cd /c/brandl_data/projects/misc/kscript-support-api
  
@@ -33,6 +33,22 @@ Release Checklist
 #./gradlew publishToSonatype closeSonatypeStagingRepository
 ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
 ```
+
+3. Do the github source release
+
+```bash
+
+# make sure that are no pending chanes
+#(git diff --exit-code && git tag v${kscript_version})  || echo "could not tag current branch"
+git diff --exit-code  || echo "There are uncommitted changes"
+
+
+git tag "1.2.5"
+
+git push origin
+git push origin --tags
+```
+
 
 Links
 -----
